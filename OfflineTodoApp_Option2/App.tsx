@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import {
     KeyboardAvoidingView,
@@ -10,19 +9,22 @@ import {
     View,
     Keyboard,
 } from 'react-native';
-import Task from './components/task';
+import Task1, { TaskObj } from './components/Task1';
 
 export default function App() {
-    const [task, setTask] = useState('');
-    const [taskItems, setTaskItems] = useState([]);
+    const [newTaskText, setNewTaskText] = useState<string>('');
+    const [taskItems, setTaskItems] = useState<TaskObj[]>([]);
 
     const handleAddTask = () => {
         Keyboard.dismiss();
-        setTaskItems([...taskItems, task]);
-        setTask(null);
+        const newTask: TaskObj = {
+            text: newTaskText,
+        };
+        setTaskItems([...taskItems, newTask]);
+        setNewTaskText('');
     };
 
-    const completeTask = (index) => {
+    const completeTask = (index: any) => {
         let itemsCopy = [...taskItems];
         itemsCopy.splice(index, 1);
         setTaskItems(itemsCopy);
@@ -32,7 +34,7 @@ export default function App() {
         <View style={styles.container}>
             {/* Today's tasks */}
             <View style={styles.tasksWrapper}>
-                <Text style={styles.sectionTitle}>Today's Tasks</Text>
+                <Text style={styles.sectionTitle}>Typescript Today's Tasks</Text>
 
                 <View style={styles.items}>
                     {taskItems.map((item, index) => {
@@ -40,7 +42,7 @@ export default function App() {
                             <TouchableOpacity
                                 key={index}
                                 onPress={() => completeTask(index)}>
-                                <Task text={item} />
+                                <Task1 task={item} />
                             </TouchableOpacity>
                         );
                     })}
@@ -54,8 +56,8 @@ export default function App() {
                 <TextInput
                     style={styles.input}
                     placeholder={'Write a task'}
-                    value={task}
-                    onChangeText={(text) => setTask(text)}
+                    value={newTaskText}
+                    onChangeText={(text) => setNewTaskText(text)}
                 />
 
                 <TouchableOpacity onPress={() => handleAddTask()}>

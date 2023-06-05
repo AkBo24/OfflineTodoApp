@@ -1,11 +1,21 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const Task = (props) => {
+export interface TaskObj {
+    text: string;
+}
+
+interface Task1Props {
+    task: TaskObj;
+}
+
+const Task1 = (props: Task1Props) => {
+    const task: TaskObj = props.task;
+
     return (
         <View style={styles.item}>
             <View style={styles.itemLeft}>
                 <TouchableOpacity style={styles.square}></TouchableOpacity>
-                <Text style={styles.itemText}>{props.text}</Text>
+                <Text style={styles.itemText}>{task.text}</Text>
             </View>
 
             <View style={styles.circular} />
@@ -48,4 +58,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Task;
+export default Task1;
