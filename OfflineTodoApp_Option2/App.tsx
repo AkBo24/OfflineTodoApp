@@ -10,7 +10,7 @@ import {
     View,
 } from 'react-native';
 import Constants from 'expo-constants';
-import Task1, { TaskType } from './components/Task/Task';
+import Task, { TaskType } from './components/Task/Task';
 
 function App() {
     const [newTaskText, setNewTaskText] = useState<string>('');
@@ -43,7 +43,7 @@ function App() {
                             <TouchableOpacity
                                 key={index}
                                 onPress={() => completeTask(index)}>
-                                <Task1 task={item} />
+                                <Task task={item} />
                             </TouchableOpacity>
                         );
                     })}

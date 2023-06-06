@@ -8,7 +8,7 @@ interface TaskProps {
     task: TaskType;
 }
 
-const Task1 = (props: TaskProps) => {
+const Task = (props: TaskProps) => {
     const task: TaskType = props.task;
 
     return (
@@ -58,4 +58,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Task1;
+export default Task;
