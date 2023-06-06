@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react-native';
+import { ComponentStory, ComponentMeta, StoryObj } from '@storybook/react-native';
 import Task from './Task';
 
 const MyTaskMeta: ComponentMeta<typeof Task> = {
@@ -14,10 +14,21 @@ const MyTaskMeta: ComponentMeta<typeof Task> = {
 
 export default MyTaskMeta;
 
-/**
- * type MyButtonStory = ComponentStory<typeof MyButton>;
- * export const Basic: MyButtonStory = (args) => <MyButton {...args} />;
- */
-
 type MyTaskStory = ComponentStory<typeof Task>;
+type TaskObj = StoryObj<typeof Task>;
+
 export const Basic: MyTaskStory = (args) => <Task {...args} />;
+export const LongTask: TaskObj = {
+    args: {
+        task: {
+            text: 'SUPER DUPER LONG TASK SUPER DUPER LONG TASK SUPER DUPER LONG TASK SUPER DUPER LONG TASK',
+        },
+    },
+};
+export const EmptyTask: TaskObj = {
+    args: {
+        task: {
+            Text: '',
+        },
+    },
+};
