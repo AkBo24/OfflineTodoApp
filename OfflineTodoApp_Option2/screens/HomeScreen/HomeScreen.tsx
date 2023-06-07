@@ -1,18 +1,17 @@
-import { useState } from 'react';
 import {
     Keyboard,
     KeyboardAvoidingView,
     Platform,
-    StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
     View,
+    StyleSheet,
 } from 'react-native';
-import Constants from 'expo-constants';
+import { useState } from 'react';
 import Task, { TaskType } from '../../components/Task/Task';
 
-function App() {
+const HomeScreen = () => {
     const [newTaskText, setNewTaskText] = useState<string>('');
     const [taskItems, setTaskItems] = useState<TaskType[]>([]);
 
@@ -69,14 +68,7 @@ function App() {
             </KeyboardAvoidingView>
         </View>
     );
-}
-
-let AppEntryPoint = App;
-const enableStorybook: boolean = Constants.expoConfig?.extra?.storybookEnabled === 'true';
-
-if (enableStorybook) {
-    AppEntryPoint = require('./.ondevice').default;
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -124,4 +116,4 @@ const styles = StyleSheet.create({
     addText: {},
 });
 
-export default AppEntryPoint;
+export default HomeScreen;
