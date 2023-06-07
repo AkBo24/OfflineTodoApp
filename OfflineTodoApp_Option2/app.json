@@ -1,5 +1,9 @@
 {
   "expo": {
+    "scheme": "acme",
+    "web": {
+      "bundler": "metro"
+    },
     "name": "OfflineTodoApp_Option2",
     "slug": "OfflineTodoApp_Option2"
   }
