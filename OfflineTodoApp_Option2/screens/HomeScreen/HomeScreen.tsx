@@ -9,7 +9,8 @@ import {
     StyleSheet,
 } from 'react-native';
 import { useState } from 'react';
-import Task, { TaskType } from '../../components/Task/Task';
+import Task, { TaskCategory, TaskType } from '../../components/Task/Task';
+import { Link } from 'expo-router';
 
 const HomeScreen = () => {
     const [newTaskText, setNewTaskText] = useState<string>('');
@@ -17,8 +18,18 @@ const HomeScreen = () => {
 
     const handleAddTask = () => {
         Keyboard.dismiss();
+
+        let newTaskCategory: TaskCategory;
+
+        if (taskItems.length === 0) newTaskCategory = 'PERSONAL';
+        else {
+            newTaskCategory =
+                taskItems.at(-1)?.taskCategory === 'PERSONAL' ? 'WORK' : 'PERSONAL';
+        }
+
         const newTask: TaskType = {
             text: newTaskText,
+            taskCategory: newTaskCategory,
         };
         setTaskItems([...taskItems, newTask]);
         setNewTaskText('');
@@ -49,6 +60,9 @@ const HomeScreen = () => {
                 </View>
             </View>
 
+            <Link href='/personalTasks'>Personal Tasks</Link>
+            <Link href='/workTasks'>Work Tasks</Link>
+
             {/* Write a task */}
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -59,7 +73,6 @@ const HomeScreen = () => {
                     value={newTaskText}
                     onChangeText={(text) => setNewTaskText(text)}
                 />
-
                 <TouchableOpacity onPress={() => handleAddTask()}>
                     <View style={styles.addWrapper}>
                         <Text style={styles.addText}>+</Text>
@@ -76,7 +89,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#E8EAED',
     },
     tasksWrapper: {
-        paddingTop: 80,
+        paddingTop: 30,
         paddingHorizontal: 20,
     },
     sectionTitle: {

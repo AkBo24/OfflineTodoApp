@@ -1,8 +1,8 @@
-import { Slot } from 'expo-router';
+import { Stack } from 'expo-router';
 import Constants from 'expo-constants';
 
 const RootLayout = () => {
-    return <Slot />;
+    <Stack />;
 };
 
 let AppEntryPoint = RootLayout;
