@@ -8,12 +8,12 @@ type PersonalTasksScreenProps = {
     allTasks: TaskType[];
 };
 
-const PersonalTasksScreen = () => {
+const WorkTasksScreen = () => {
     return (
         <View style={styles.container}>
             {/* Today's tasks */}
             <View style={styles.tasksWrapper}>
-                <Text style={styles.sectionTitle}>Personal Tasks</Text>
+                <Text style={styles.sectionTitle}>Work Tasks</Text>
 
                 <View style={styles.items}>
                     {/* {taskItems.map((item, index) => {
@@ -102,4 +102,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PersonalTasksScreen;
+export default WorkTasksScreen;

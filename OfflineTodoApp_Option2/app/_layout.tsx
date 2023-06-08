@@ -1,14 +1,16 @@
 import { Stack } from 'expo-router';
 import Constants from 'expo-constants';
 
-const RootLayout = () => {
-    <Stack />;
+const Layout = () => {
+    return <Stack />;
 };
 
-let AppEntryPoint = RootLayout;
-const enableStorybook: boolean = Constants.expoConfig?.extra?.storybookEnabled === 'true';
+let AppEntryPoint = Layout;
 
-if (enableStorybook) {
+const disableStorybook: boolean =
+    Constants.expoConfig?.extra?.storybookEnabled === 'true';
+
+if (disableStorybook) {
     AppEntryPoint = require('../.ondevice').default;
 }
 
