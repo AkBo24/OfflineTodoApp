@@ -58,10 +58,12 @@ const HomeScreen = () => {
                         );
                     })}
                 </View>
-            </View>
 
-            <Link href='/personalTasks'>Personal Tasks</Link>
-            <Link href='/workTasks'>Work Tasks</Link>
+                <View style={styles.linksContainer}>
+                    <Link href='/personalTasks'>Personal Tasks</Link>
+                    <Link href='/workTasks'>Work Tasks</Link>
+                </View>
+            </View>
 
             {/* Write a task */}
             <KeyboardAvoidingView
@@ -87,6 +89,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#E8EAED',
+    },
+    linksContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     },
     tasksWrapper: {
         paddingTop: 30,
