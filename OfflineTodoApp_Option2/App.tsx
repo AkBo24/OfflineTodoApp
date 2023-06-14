@@ -20,6 +20,7 @@ function App() {
         Keyboard.dismiss();
         const newTask: TaskType = {
             text: newTaskText,
+            taskCategory: 'PERSONAL',
         };
         setTaskItems([...taskItems, newTask]);
         setNewTaskText('');

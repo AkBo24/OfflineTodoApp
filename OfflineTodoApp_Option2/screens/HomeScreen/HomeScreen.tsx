@@ -11,10 +11,14 @@ import {
 import { useState } from 'react';
 import Task, { TaskCategory, TaskType } from '../../components/Task/Task';
 import { Link } from 'expo-router';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
 const HomeScreen = () => {
     const [newTaskText, setNewTaskText] = useState<string>('');
     const [taskItems, setTaskItems] = useState<TaskType[]>([]);
+
+    const tasks = useAppSelector((state) => state.tasks.tasks);
+    const dispatch = useAppDispatch();
 
     const handleAddTask = () => {
         Keyboard.dismiss();
