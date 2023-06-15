@@ -38,9 +38,6 @@ export const tasksSlice = createSlice({
 
         completeTask: (state, action: PayloadAction<number>) => {
             state.tasks.splice(action.payload, 1);
-            console.log(state);
-
-            // setTaskItems(itemsCopy);
         },
     },
 });
