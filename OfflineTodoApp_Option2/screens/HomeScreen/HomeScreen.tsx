@@ -8,7 +8,7 @@ import {
     View,
     StyleSheet,
 } from 'react-native';
-import { useState } from 'react';
+import { Key, useState } from 'react';
 import Task, { TaskCategory, TaskType } from '../../components/Task/Task';
 import { Link } from 'expo-router';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
@@ -17,7 +17,7 @@ import { addTask, completeTask } from '../../features/tasks/tasksSlice';
 const HomeScreen = () => {
     const [newTaskText, setNewTaskText] = useState<string>('');
 
-    const tasks = useAppSelector((state) => state.tasks.tasks);
+    const tasks = useAppSelector((state) => state.tasks);
     const dispatch = useAppDispatch();
 
     const handleAddTask = () => {
@@ -37,7 +37,7 @@ const HomeScreen = () => {
                 <Text style={styles.sectionTitle}>Typescript Today's Tasks</Text>
 
                 <View style={styles.items}>
-                    {tasks.map((item, index) => {
+                    {tasks.map((item: TaskType, index: number) => {
                         return (
                             <TouchableOpacity
                                 key={index}
