@@ -12,6 +12,7 @@ import { useState } from 'react';
 import Task, { TaskCategory, TaskType } from '../../components/Task/Task';
 import { Link } from 'expo-router';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { addTask } from '../../features/tasks/tasksSlice';
 
 const HomeScreen = () => {
     const [newTaskText, setNewTaskText] = useState<string>('');
@@ -35,8 +36,9 @@ const HomeScreen = () => {
             text: newTaskText,
             taskCategory: newTaskCategory,
         };
-        setTaskItems([...taskItems, newTask]);
-        setNewTaskText('');
+        // setTaskItems([...taskItems, newTask]);
+        // setNewTaskText('');
+        dispatch(addTask(newTask));
     };
 
     const completeTask = (index: any) => {
