@@ -11,34 +11,23 @@ import {
 import { useState } from 'react';
 import Task, { TaskCategory, TaskType } from '../../components/Task/Task';
 import { Link } from 'expo-router';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { addTask, completeTask } from '../../features/tasks/tasksSlice';
 
 const HomeScreen = () => {
     const [newTaskText, setNewTaskText] = useState<string>('');
-    const [taskItems, setTaskItems] = useState<TaskType[]>([]);
+
+    const tasks = useAppSelector((state) => state.tasks.tasks);
+    const dispatch = useAppDispatch();
 
     const handleAddTask = () => {
         Keyboard.dismiss();
 
-        let newTaskCategory: TaskCategory;
-
-        if (taskItems.length === 0) newTaskCategory = 'PERSONAL';
-        else {
-            newTaskCategory =
-                taskItems.at(-1)?.taskCategory === 'PERSONAL' ? 'WORK' : 'PERSONAL';
-        }
-
-        const newTask: TaskType = {
-            text: newTaskText,
-            taskCategory: newTaskCategory,
-        };
-        setTaskItems([...taskItems, newTask]);
-        setNewTaskText('');
+        dispatch(addTask(newTaskText));
     };
 
-    const completeTask = (index: any) => {
-        let itemsCopy = [...taskItems];
-        itemsCopy.splice(index, 1);
-        setTaskItems(itemsCopy);
+    const handleCompleteTask = (index: number) => {
+        dispatch(completeTask(index));
     };
 
     return (
@@ -48,11 +37,11 @@ const HomeScreen = () => {
                 <Text style={styles.sectionTitle}>Typescript Today's Tasks</Text>
 
                 <View style={styles.items}>
-                    {taskItems.map((item, index) => {
+                    {tasks.map((item, index) => {
                         return (
                             <TouchableOpacity
                                 key={index}
-                                onPress={() => completeTask(index)}>
+                                onPress={() => handleCompleteTask(index)}>
                                 <Task task={item} />
                             </TouchableOpacity>
                         );
