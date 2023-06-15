@@ -12,11 +12,10 @@ import { useState } from 'react';
 import Task, { TaskCategory, TaskType } from '../../components/Task/Task';
 import { Link } from 'expo-router';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { addTask } from '../../features/tasks/tasksSlice';
+import { addTask, completeTask } from '../../features/tasks/tasksSlice';
 
 const HomeScreen = () => {
     const [newTaskText, setNewTaskText] = useState<string>('');
-    const [taskItems, setTaskItems] = useState<TaskType[]>([]);
 
     const tasks = useAppSelector((state) => state.tasks.tasks);
     const dispatch = useAppDispatch();
@@ -27,10 +26,8 @@ const HomeScreen = () => {
         dispatch(addTask(newTaskText));
     };
 
-    const completeTask = (index: any) => {
-        let itemsCopy = [...taskItems];
-        itemsCopy.splice(index, 1);
-        setTaskItems(itemsCopy);
+    const handleCompleteTask = (index: number) => {
+        dispatch(completeTask(index));
     };
 
     return (
@@ -44,7 +41,7 @@ const HomeScreen = () => {
                         return (
                             <TouchableOpacity
                                 key={index}
-                                onPress={() => completeTask(index)}>
+                                onPress={() => handleCompleteTask(index)}>
                                 <Task task={item} />
                             </TouchableOpacity>
                         );

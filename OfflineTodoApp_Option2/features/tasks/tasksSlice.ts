@@ -10,7 +10,7 @@ const initialState: TasksState = {
     tasks: [
         {
             taskCategory: 'PERSONAL',
-            text: 'Initial task',
+            text: 'Initial Task',
         },
     ],
 };
@@ -22,10 +22,9 @@ export const tasksSlice = createSlice({
         addTask: (state, action: PayloadAction<string>) => {
             const taskItems = state.tasks;
             const newTaskText = action.payload;
-            let newTaskCategory: TaskCategory;
+            let newTaskCategory: TaskCategory = 'PERSONAL';
 
-            if (taskItems.length === 0) newTaskCategory = 'PERSONAL';
-            else {
+            if (taskItems.length > 0) {
                 newTaskCategory =
                     taskItems.at(-1)?.taskCategory === 'PERSONAL' ? 'WORK' : 'PERSONAL';
             }
@@ -34,11 +33,18 @@ export const tasksSlice = createSlice({
                 text: newTaskText,
                 taskCategory: newTaskCategory,
             };
-            state.tasks.push(newTask);
+            taskItems.push(newTask);
+        },
+
+        completeTask: (state, action: PayloadAction<number>) => {
+            state.tasks.splice(action.payload, 1);
+            console.log(state);
+
+            // setTaskItems(itemsCopy);
         },
     },
 });
 
-export const { addTask } = tasksSlice.actions;
+export const { addTask, completeTask } = tasksSlice.actions;
 export const selectTasks = (state: RootState) => state.tasks.tasks;
 export default tasksSlice.reducer;
