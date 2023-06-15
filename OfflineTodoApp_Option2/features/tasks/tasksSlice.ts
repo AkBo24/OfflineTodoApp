@@ -7,7 +7,12 @@ interface TasksState {
 }
 
 const initialState: TasksState = {
-    tasks: [],
+    tasks: [
+        {
+            taskCategory: 'PERSONAL',
+            text: 'Initial task',
+        },
+    ],
 };
 
 export const tasksSlice = createSlice({

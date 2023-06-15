@@ -52,7 +52,7 @@ const HomeScreen = () => {
                 <Text style={styles.sectionTitle}>Typescript Today's Tasks</Text>
 
                 <View style={styles.items}>
-                    {taskItems.map((item, index) => {
+                    {tasks.map((item, index) => {
                         return (
                             <TouchableOpacity
                                 key={index}
