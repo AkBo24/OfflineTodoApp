@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { TaskType } from '../../components/Task/Task';
+import { TaskCategory, TaskType } from '../../components/Task/Task';
 import { RootState } from '../../app/store';
 
 interface TasksState {
@@ -19,8 +19,22 @@ export const tasksSlice = createSlice({
     name: 'tasks',
     initialState,
     reducers: {
-        addTask: (state, action: PayloadAction<TaskType>) => {
-            state.tasks.push(action.payload);
+        addTask: (state, action: PayloadAction<string>) => {
+            const taskItems = state.tasks;
+            const newTaskText = action.payload;
+            let newTaskCategory: TaskCategory;
+
+            if (taskItems.length === 0) newTaskCategory = 'PERSONAL';
+            else {
+                newTaskCategory =
+                    taskItems.at(-1)?.taskCategory === 'PERSONAL' ? 'WORK' : 'PERSONAL';
+            }
+
+            const newTask: TaskType = {
+                text: newTaskText,
+                taskCategory: newTaskCategory,
+            };
+            state.tasks.push(newTask);
         },
     },
 });

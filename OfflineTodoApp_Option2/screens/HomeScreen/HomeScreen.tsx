@@ -24,21 +24,7 @@ const HomeScreen = () => {
     const handleAddTask = () => {
         Keyboard.dismiss();
 
-        let newTaskCategory: TaskCategory;
-
-        if (taskItems.length === 0) newTaskCategory = 'PERSONAL';
-        else {
-            newTaskCategory =
-                taskItems.at(-1)?.taskCategory === 'PERSONAL' ? 'WORK' : 'PERSONAL';
-        }
-
-        const newTask: TaskType = {
-            text: newTaskText,
-            taskCategory: newTaskCategory,
-        };
-        // setTaskItems([...taskItems, newTask]);
-        // setNewTaskText('');
-        dispatch(addTask(newTask));
+        dispatch(addTask(newTaskText));
     };
 
     const completeTask = (index: any) => {
